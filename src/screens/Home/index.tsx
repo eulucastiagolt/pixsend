@@ -25,52 +25,53 @@ const data = [
     price: 10.0,
   },
   {
-    id: 1,
+    id: 2,
+    title: "Cobrança para x2 blas",
+    client: "Lucas Tiago",
+    price: 10.0,
+  },
+  {
+    id: 3,
+    title: "Cobrança para x3 blas",
+    client: "Lucas Tiago",
+    price: 10.0,
+  },
+  {
+    id: 4,
+    title: "Cobrança para x4 blas",
+    client: "Lucas Tiago",
+    price: 10.0,
+  },
+  {
+    id: 5,
+    title: "Cobrança para x5 blas",
+    client: "Lucas Tiago",
+    price: 10.0,
+  },
+  {
+    id: 6,
     title: "Cobrança para x blas",
     client: "Lucas Tiago",
     price: 10.0,
   },
   {
-    id: 1,
-    title: "Cobrança para x blas",
-    client: "Lucas Tiago",
-    price: 10.0,
-  },
-  {
-    id: 1,
-    title: "Cobrança para x blas",
-    client: "Lucas Tiago",
-    price: 10.0,
-  },
-  {
-    id: 1,
-    title: "Cobrança para x blas",
-    client: "Lucas Tiago",
-    price: 10.0,
-  },
-  {
-    id: 1,
-    title: "Cobrança para x blas",
-    client: "Lucas Tiago",
-    price: 10.0,
-  },
-  {
-    id: 1,
+    id: 7,
     title: "Cobrança para x blas",
     client: "Lucas Tiago",
     price: 10.0,
   },
 ];
 
-const ItemRender = ({ item }: { item: Items }) => {
+const ItemRender = ({ item, nav }: { item: Items }) => {
+  
   return (
     <Card
       mode="outlined"
       onPress={() => {
-        Alert.alert("Mensagem", "Logo teremos informações completa");
+        nav.navigate("ItemDetails");
       }}
     >
-      <Card.Title title={item.title} right={(props) => <IconButton {...props} icon="pencil" onPress={() => {}} />} />
+      <Card.Title title={item.title} right={(props) => <IconButton {...props} icon="pencil" onPress={() => {nav.navigate("ItemEdit");}} />} />
       <Card.Content>
         <Text variant="titleSmall">Cliente: {item.client}</Text>
         <Text variant="titleSmall">Valor: {Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(item.price)}</Text>
@@ -87,7 +88,7 @@ const Home = () => {
     <>
       <FlashList
         data={data}
-        renderItem={ItemRender}
+        renderItem={({ item }: { item: Items }) => <ItemRender item={item} nav={navigation} />}
         estimatedItemSize={44}
         contentContainerStyle={{ paddingHorizontal: 15, paddingVertical: 15 }}
         ItemSeparatorComponent={() => <View style={{ height: 15 }} />}
